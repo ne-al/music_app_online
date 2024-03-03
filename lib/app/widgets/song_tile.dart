@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
-import 'package:music_app_online/core/helper/audio_helper.dart';
-import 'package:music_app_online/main.dart';
+import 'package:music_app_online/app/screens/pages/player.dart';
 import 'package:popover/popover.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
@@ -16,14 +14,13 @@ class SongTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
-        String url = await AudioHelper().convertToMusicUrl(data.url);
-
-        Logger().w(url);
-
-        await audioHandler.playFromUri(Uri.parse(url));
-
-        audioHandler.play();
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PlayerPage(video: data),
+          ),
+        );
       },
       child: ListTile(
         leading: AspectRatio(
