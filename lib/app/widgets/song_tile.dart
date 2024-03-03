@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:music_app_online/app/screens/pages/player.dart';
 import 'package:popover/popover.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SongTile extends StatelessWidget {
   final Video data;
@@ -37,12 +38,13 @@ class SongTile extends StatelessWidget {
           data.title,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontSize: 15),
+          style: GoogleFonts.lato(fontSize: 15),
         ),
         subtitle: Text(
           data.author,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+          style: GoogleFonts.lato(),
         ),
         trailing: Builder(builder: (context) {
           return IconButton(

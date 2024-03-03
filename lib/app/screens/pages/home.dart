@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
-import 'package:music_app_online/app/screens/pages/search_page.dart';
+import 'package:music_app_online/app/screens/pages/search.dart';
 import 'package:music_app_online/app/widgets/song_tile.dart';
 import 'package:music_app_online/core/helper/audio_helper.dart';
 import 'package:music_app_online/core/providers/music_providers.dart';

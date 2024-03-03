@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:music_app_online/app/widgets/song_tile.dart';
@@ -40,6 +39,10 @@ class _SearchPageState extends ConsumerState<SearchPage> {
             title: TextField(
               controller: _searchController,
               focusNode: _searchFocusNode,
+              style: GoogleFonts.lato(
+                fontWeight: FontWeight.w300,
+                fontSize: 15,
+              ),
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.all(0),
                 prefixIcon: const Icon(Icons.music_note_rounded),

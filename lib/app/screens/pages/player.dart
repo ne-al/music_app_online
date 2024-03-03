@@ -91,7 +91,7 @@ class _PlayerPageState extends State<PlayerPage> {
                             icon: const Icon(Icons.skip_previous_rounded),
                           ),
                           IconButton(
-                            iconSize: 66,
+                            iconSize: 60,
                             onPressed: () {
                               !snapshot.data!.playing
                                   ? audioHandler.play()
