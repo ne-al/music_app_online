@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:popover/popover.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class SongTile extends StatelessWidget {
@@ -33,10 +34,24 @@ class SongTile extends StatelessWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      trailing: IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.more_vert_rounded),
-      ),
+      trailing: Builder(builder: (context) {
+        return IconButton(
+          onPressed: () {
+            showPopover(
+              context: context,
+              bodyBuilder: (context) {
+                return const SizedBox(
+                  height: 180,
+                  width: 120,
+                );
+              },
+              direction: PopoverDirection.left,
+              backgroundColor: Theme.of(context).colorScheme.surface,
+            );
+          },
+          icon: const Icon(Icons.more_vert_rounded),
+        );
+      }),
     );
   }
 }

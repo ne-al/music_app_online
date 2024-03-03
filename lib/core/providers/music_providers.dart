@@ -21,7 +21,10 @@ final searchMusicProvider =
   final yt = YoutubeExplode();
   List<Video> music = [];
 
-  var response = await yt.search.search(query);
+  var response = await yt.search.search(
+    query,
+    filter: DurationFilters.short,
+  );
 
   for (var data in response) {
     music.add(data);

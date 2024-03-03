@@ -41,6 +41,8 @@ class MyMusicApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.deepPurple,
           brightness: Brightness.dark,
+        ).copyWith(
+          background: Colors.black,
         ),
         useMaterial3: true,
       ),
