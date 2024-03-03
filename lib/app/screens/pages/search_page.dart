@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:music_app_online/app/widgets/song_tile.dart';
 import 'package:music_app_online/core/providers/music_providers.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({super.key});
@@ -15,8 +15,6 @@ class SearchPage extends ConsumerStatefulWidget {
 class _SearchPageState extends ConsumerState<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocusNode = FocusNode();
-  List<Video> musicList = [];
-  bool isLoading = false;
 
   void searchMusic() {
     _searchFocusNode.unfocus();
@@ -30,8 +28,10 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       extendBody: true,
       body: CustomScrollView(
+        shrinkWrap: true,
         slivers: [
           SliverAppBar(
             floating: true,
@@ -73,20 +73,26 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                     : _searchController.text.trim()))
                 .when(
                   data: (data) {
-                    return ListView.builder(
+                    return CustomScrollView(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        return SongTile(data: data[index]);
-                      },
+                      slivers: [
+                        SliverList.builder(
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            return !data[index].isLive
+                                ? SongTile(data: data[index])
+                                : Container();
+                          },
+                        ),
+                      ],
                     );
                   },
                   error: (error, stackTrace) => Center(
                     child: Text('$error'),
                   ),
                   loading: () => const Center(
-                    child: CircularProgressIndicator.adaptive(),
+                    child: LinearProgressIndicator(),
                   ),
                 ),
           )

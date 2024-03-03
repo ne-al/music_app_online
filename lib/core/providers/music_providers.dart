@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
-final homeMusicProvider = FutureProvider<List<Video>>((ref) async {
+final homeMusicProvider = FutureProvider.autoDispose<List<Video>>((ref) async {
+  ref.keepAlive();
   final yt = YoutubeExplode();
   List<Video> music = [];
 
@@ -17,7 +18,7 @@ final homeMusicProvider = FutureProvider<List<Video>>((ref) async {
 });
 
 final searchMusicProvider =
-    FutureProvider.family<List<Video>, String>((ref, query) async {
+    FutureProvider.family.autoDispose<List<Video>, String>((ref, query) async {
   final yt = YoutubeExplode();
   List<Video> music = [];
 
