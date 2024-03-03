@@ -15,6 +15,12 @@ class MyAudioHandler extends BaseAudioHandler with SeekHandler, QueueHandler {
   }
 
   @override
+  Future<void> playMediaItem(MediaItem mediaItem) {
+    _player.setUrl(mediaItem.id);
+    return super.playMediaItem(mediaItem);
+  }
+
+  @override
   Future<void> play() => _player.play();
 
   @override

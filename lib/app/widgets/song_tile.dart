@@ -38,13 +38,17 @@ class SongTile extends StatelessWidget {
           data.title,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.lato(fontSize: 15),
+          style: GoogleFonts.lato(
+            fontSize: 15,
+          ),
         ),
         subtitle: Text(
           data.author,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.lato(),
+          style: GoogleFonts.lato(
+            color: Colors.grey.shade500,
+          ),
         ),
         trailing: Builder(builder: (context) {
           return IconButton(

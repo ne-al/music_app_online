@@ -3,6 +3,7 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:music_app_online/core/helper/audio_helper.dart';
 import 'package:music_app_online/main.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
@@ -27,8 +28,19 @@ class _PlayerPageState extends State<PlayerPage> {
 
   void initPlayer() async {
     String url = await AudioHelper().convertToMusicUrl(widget.video.url);
+    //TODO skip if playing music is same as choosen music
 
-    await audioHandler.playFromUri(Uri.parse(url));
+    await audioHandler.playMediaItem(
+      MediaItem(
+        id: url,
+        title: widget.video.title,
+        artUri: Uri.parse(widget.video.thumbnails.highResUrl),
+        artist: widget.video.author,
+        duration: widget.video.duration,
+      ),
+    );
+
+    // await audioHandler.playFromUri(Uri.parse(url));
 
     audioHandler.play();
   }
@@ -54,13 +66,30 @@ class _PlayerPageState extends State<PlayerPage> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  Text(data.title),
-                  Text(data.author),
+                  Text(
+                    data.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.lato(
+                      fontSize: 16,
+                    ),
+                  ),
+                  const Gap(12),
+                  Text(
+                    data.author,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.lato(
+                      fontSize: 15,
+                    ),
+                  ),
                 ],
               ),
             ),
             const Gap(20),
-            StreamBuilder<PlaybackState>(
+            StreamBuilder<PlaybackState?>(
               stream: audioHandler.playbackState.stream,
               builder: (context, snapshot) {
                 Duration progress = snapshot.data?.position ?? Duration.zero;
